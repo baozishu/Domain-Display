@@ -108,9 +108,9 @@ function initDb(db: EnhancedDatabase): void {
       description TEXT,
       registrar TEXT,
       registrar_icon TEXT,
-      registrationTime TEXT,
-      expirationTime TEXT,
-      purchaseUrl TEXT,
+      registration_time TEXT,
+      expiration_time TEXT,
+      purchase_url TEXT,
       status TEXT DEFAULT 'available',
       addedAt INTEGER,
       updatedAt INTEGER
@@ -124,9 +124,9 @@ function initDb(db: EnhancedDatabase): void {
       name TEXT NOT NULL,
       extension TEXT NOT NULL,
       soldPrice REAL,
-      soldAt INTEGER,
+      sold_date INTEGER,
       description TEXT,
-      soldTo TEXT,
+      sold_to TEXT,
       status TEXT DEFAULT 'sold'
     )
   `);
