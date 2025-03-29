@@ -1,35 +1,27 @@
-# 域名展示系统
+# Domain Showcase Page
 
-![](/2025_134943.webp)
+A Next.js application for showcasing and managing domain names with SQLite database storage.
 
-![](/2025_13507.webp)
+## Features
 
-这是一个简单而强大的域名展示系统，用于管理和展示域名集合。系统提供了直观的用户界面！
+- Display available domains for sale
+- Show sold domains
+- Manage friendly links
+- Admin dashboard for data management
+- Customizable site settings
+- Authentication system
 
-## 功能特点
+## Getting Started
 
-- **域名展示**：以卡片形式展示域名信息，包括域名名称、TLD、提供商和到期日期
-- **响应式设计**：适配各种屏幕尺寸，提供良好的移动端体验
-- **备份功能**：直接备份，下次直接导入，无需再手动输入域名信息
-- **购买功能**：提供域名购买入口
+### Prerequisites
 
-## 默认密码
+- Node.js 18.x or higher
+- npm or yarn
 
-```bash
-admin123
-```
+### Installation
 
-## 如何安装
-
-- vercel部署
-
-- 构建命令 
-```
-bun run build
-```
-
-- 安装命令
-```
-bun install
-```
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/domain-showcase.git
+   cd domain-showcase
 

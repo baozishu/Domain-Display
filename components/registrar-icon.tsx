@@ -17,7 +17,7 @@ export function RegistrarIcon({ iconName, className = "h-5 w-5 text-muted-foregr
   const height = `${size}px`
 
   // 如果没有图标名称，返回默认图标
-  if (!iconName || !settings.registrarIcons[iconName.toLowerCase()]) {
+  if (!iconName || !settings?.registrarIcons?.[iconName.toLowerCase()]) {
     return (
       <svg
         xmlns="http://www.w3.org/2000/svg"

@@ -1,11 +1,11 @@
 "use client"
-import { useState, useEffect, useMemo } from "react"
-import { ShoppingCart, CheckCircle2, ExternalLink, Calendar, Filter, PieChart, Building } from "lucide-react"
+import React from "react"
+import { ShoppingCart, CheckCircle2, ExternalLink, Calendar, Filter, PieChart, Building, Terminal, Globe } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import { RegistrarIcon } from "@/components/registrar-icon"
-import { useDomainContext } from "./contexts/domain-context"
+import { useDomains } from "@/contexts/domain-context"
 import { 
   Select,
   SelectContent,
@@ -39,19 +39,22 @@ interface FriendlyLink {
 
 export default function MultiDomainDisplay() {
   // 使用域名上下文而不是直接导入JSON
-  const { domains, soldDomains, friendlyLinks } = useDomainContext()
+  const { domains, soldDomains, friendlyLinks } = useDomains()
   
   // 添加状态过滤
-  const [domainFilter, setDomainFilter] = useState<"all" | "available" | "sold">("all")
+  const [domainFilter, setDomainFilter] = React.useState<"all" | "available" | "sold">("all")
   
   // 添加注册商筛选
-  const [registrarFilter, setRegistrarFilter] = useState<string>("all")
+  const [registrarFilter, setRegistrarFilter] = React.useState<string>("all")
+  
+  // 添加域名后缀筛选
+  const [extensionFilter, setExtensionFilter] = React.useState<string>("all")
   
   // 添加动画效果状态
-  const [isLoaded, setIsLoaded] = useState(false)
+  const [isLoaded, setIsLoaded] = React.useState(false)
   
   // 加载完成后触发动画
-  useEffect(() => {
+  React.useEffect(() => {
     setIsLoaded(true)
   }, [])
 
@@ -63,15 +66,33 @@ export default function MultiDomainDisplay() {
   }
 
   // 获取所有注册商列表
-  const registrars = useMemo(() => {
+  const registrars = React.useMemo(() => {
     const registrarSet = new Set<string>();
-    domains.forEach(domain => {
+    domains.forEach((domain: Domain) => {
       if (domain.registrar) {
         registrarSet.add(domain.registrar);
       }
     });
     return Array.from(registrarSet).sort();
   }, [domains]);
+  
+  // 获取所有域名后缀列表
+  const domainExtensions = React.useMemo(() => {
+    const extensionSet = new Set<string>();
+    // 从待售域名中获取后缀
+    domains.forEach((domain: Domain) => {
+      if (domain.extension) {
+        extensionSet.add(domain.extension.toLowerCase());
+      }
+    });
+    // 从已售域名中获取后缀
+    soldDomains.forEach((domain: Domain) => {
+      if (domain.extension) {
+        extensionSet.add(domain.extension.toLowerCase());
+      }
+    });
+    return Array.from(extensionSet).sort();
+  }, [domains, soldDomains]);
 
   // 根据筛选条件获取要显示的域名列表
   const getFilteredDomains = () => {
@@ -92,8 +113,15 @@ export default function MultiDomainDisplay() {
     
     // 再按注册商筛选（只对待售域名有效）
     if (registrarFilter !== "all" && domainFilter !== "sold") {
-      filtered = filtered.filter(domain => 
+      filtered = filtered.filter((domain: Domain) => 
         domain.status !== "sold" && domain.registrar === registrarFilter
+      );
+    }
+    
+    // 按域名后缀筛选
+    if (extensionFilter !== "all") {
+      filtered = filtered.filter((domain: Domain) => 
+        domain.extension.toLowerCase() === extensionFilter
       );
     }
     
@@ -109,14 +137,14 @@ export default function MultiDomainDisplay() {
   const totalCount = availableCount + soldCount;
   
   // 按扩展名分组域名
-  const domainsByExtension = filteredDomains.reduce((acc, domain) => {
+  const domainsByExtension = filteredDomains.reduce((acc: Record<string, Domain[]>, domain: Domain) => {
     const ext = domain.extension.toLowerCase();
     if (!acc[ext]) {
       acc[ext] = [];
     }
     acc[ext].push(domain);
     return acc;
-  }, {} as { [key: string]: Domain[] });
+  }, {} as Record<string, Domain[]>);
   
   // 获取所有扩展名并排序
   const extensions = Object.keys(domainsByExtension).sort();
@@ -172,7 +200,7 @@ export default function MultiDomainDisplay() {
           
           <Tabs 
             value={domainFilter} 
-            onValueChange={(value) => setDomainFilter(value as "all" | "available" | "sold")}
+            onValueChange={(value: string) => setDomainFilter(value as "all" | "available" | "sold")}
             className="w-full sm:w-auto"
           >
             <TabsList className="grid w-full grid-cols-3">
@@ -198,41 +226,68 @@ export default function MultiDomainDisplay() {
           </Tabs>
         </div>
         
-        {/* 注册商过滤器 - 仅在显示待售域名时显示 */}
-        {domainFilter !== "sold" && registrars.length > 0 && (
-          <div className="flex justify-between items-center border-t pt-4">
+        {/* 筛选区域 */}
+        <div className="flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center border-t pt-4">
+          {/* 注册商筛选 - 仅在显示全部或待售域名时显示 */}
+          {domainFilter !== "sold" && registrars.length > 0 && (
             <div className="flex items-center gap-2">
               <Building className="h-4 w-4 text-muted-foreground" />
               <span className="text-sm font-medium">注册商：</span>
-            </div>
-            <Select 
-              value={registrarFilter} 
-              onValueChange={(value) => setRegistrarFilter(value)}
-            >
-              <SelectTrigger className="w-48">
-                <SelectValue placeholder="选择注册商" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">
-                  <div className="flex items-center justify-between w-full">
-                    <span>全部注册商</span>
-                  </div>
-                </SelectItem>
-                {registrars.map(registrar => (
-                  <SelectItem key={registrar} value={registrar}>
-                    <div className="flex items-center gap-2">
-                      <RegistrarIcon 
-                        iconName={domains.find(d => d.registrar === registrar)?.registrarIcon} 
-                        className="h-4 w-4" 
-                      />
-                      <span>{registrar}</span>
+              <Select 
+                value={registrarFilter} 
+                onValueChange={(value: string) => setRegistrarFilter(value)}
+              >
+                <SelectTrigger className="w-40">
+                  <SelectValue placeholder="选择注册商" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">
+                    <div className="flex items-center justify-between w-full">
+                      <span>全部注册商</span>
                     </div>
                   </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-        )}
+                  {registrars.map((registrar: string) => (
+                    <SelectItem key={registrar} value={registrar}>
+                      <div className="flex items-center gap-2">
+                        <RegistrarIcon 
+                          iconName={domains.find((d: Domain) => d.registrar === registrar)?.registrarIcon} 
+                          className="h-4 w-4" 
+                        />
+                        <span>{registrar}</span>
+                      </div>
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          )}
+          
+          {/* 域名后缀筛选 - 始终显示 */}
+          {domainExtensions.length > 0 && (
+            <div className="flex items-center gap-2">
+              <Globe className="h-4 w-4 text-muted-foreground" />
+              <span className="text-sm font-medium">域名后缀：</span>
+              <Select 
+                value={extensionFilter} 
+                onValueChange={(value: string) => setExtensionFilter(value)}
+              >
+                <SelectTrigger className="w-40">
+                  <SelectValue placeholder="选择后缀" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">
+                    <span>全部后缀</span>
+                  </SelectItem>
+                  {domainExtensions.map((extension: string) => (
+                    <SelectItem key={extension} value={extension}>
+                      <span>{extension}</span>
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          )}
+        </div>
       </div>
       
       {/* 分组显示域名 */}
@@ -251,7 +306,7 @@ export default function MultiDomainDisplay() {
               </div>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {domainsByExtension[extension].map((domain) => (
+                {domainsByExtension[extension].map((domain: Domain) => (
                   <Card 
                     key={domain.id} 
                     className={`overflow-hidden transition-all duration-300 hover:shadow-md ${domain.status === "sold" ? "bg-muted/30" : ""}`}>
@@ -356,7 +411,7 @@ export default function MultiDomainDisplay() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {friendlyLinks.map((link) => (
+            {friendlyLinks.map((link: FriendlyLink) => (
               <a key={link.id} href={link.url} target="_blank" rel="noopener noreferrer" className="block group">
                 <Card className="overflow-hidden h-full transition-all duration-300 hover:shadow-md hover:border-primary">
                   <CardContent className="p-6">

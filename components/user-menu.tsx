@@ -1,56 +1,64 @@
 "use client"
 
-import { useState } from "react"
+import React from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useAuth } from "@/contexts/auth-context"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Avatar, AvatarFallback } from "@/components/ui/avatar"
-import { LogOut, LayoutDashboard } from "lucide-react"
+import { 
+  LogOut, 
+  LayoutDashboard, 
+} from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 
 export function UserMenu() {
-  const { logout } = useAuth()
-  const [open, setOpen] = useState(false)
+  const { logout, user } = useAuth()
   const router = useRouter()
 
-  const handleLogout = () => {
-    logout()
-    setOpen(false)
+  const handleLogout = async () => {
+    try {
+      await logout();
+      router.push("/");
+    } catch (error) {
+      console.error("登出失败:", error);
+    }
   }
 
   return (
-    <DropdownMenu open={open} onOpenChange={setOpen}>
-      <DropdownMenuTrigger asChild>
-        <button className="flex items-center gap-2 rounded-full focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
-          <Avatar className="h-8 w-8">
-            <AvatarFallback className="bg-primary/10 text-primary">A</AvatarFallback>
-          </Avatar>
-          <span className="hidden md:inline-block text-sm font-medium">管理员</span>
-        </button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-56">
-        <DropdownMenuLabel>管理控制台</DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem asChild>
-          <Link href="/dashboard" className="flex items-center cursor-pointer">
-            <LayoutDashboard className="mr-2 h-4 w-4" />
-            <span>控制台</span>
-          </Link>
-        </DropdownMenuItem>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={handleLogout} className="text-red-600 cursor-pointer">
-          <LogOut className="mr-2 h-4 w-4" />
-          <span>退出登录</span>
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <div className="flex items-center gap-2">
+      <TooltipProvider>
+        {/* 控制台按钮 */}
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              className="flex items-center gap-2 hover:bg-primary/10" 
+            >
+              <Link href="/dashboard" className="flex items-center">
+                <LayoutDashboard className="h-4 w-4 mr-1" />
+                <span>控制台</span>
+              </Link>
+            </Button>
+          </TooltipTrigger>
+        </Tooltip>
+
+        {/* 退出登录按钮 */}
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button 
+              variant="ghost" 
+              size="sm"
+              onClick={handleLogout}
+              className="text-red-600 hover:bg-red-50 hover:text-red-700"
+            >
+              <LogOut className="h-4 w-4" />
+              <span className="ml-1 md:inline-block">退出</span>
+            </Button>
+          </TooltipTrigger>
+        </Tooltip>
+      </TooltipProvider>
+    </div>
   )
 }
 
