@@ -107,7 +107,7 @@ function initDb(db: EnhancedDatabase): void {
       price REAL,
       description TEXT,
       registrar TEXT,
-      registrarIcon TEXT,
+      registrar_icon TEXT,
       registrationTime TEXT,
       expirationTime TEXT,
       purchaseUrl TEXT,
@@ -126,7 +126,8 @@ function initDb(db: EnhancedDatabase): void {
       soldPrice REAL,
       soldAt INTEGER,
       description TEXT,
-      soldTo TEXT
+      soldTo TEXT,
+      status TEXT DEFAULT 'sold'
     )
   `);
   
@@ -154,6 +155,7 @@ function initDb(db: EnhancedDatabase): void {
     CREATE TABLE IF NOT EXISTS auth (
       id TEXT PRIMARY KEY DEFAULT 'admin',
       password TEXT DEFAULT 'admin123',
+      security_code TEXT DEFAULT '123456',
       is_logged_in INTEGER DEFAULT 0,
       created_at INTEGER DEFAULT (strftime('%s', 'now')),
       updated_at INTEGER DEFAULT (strftime('%s', 'now'))
