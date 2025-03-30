@@ -1,0 +1,33 @@
+[
+  {
+    "id": "1",
+    "name": "域名注册服务",
+    "url": "https://example.com/register",
+    "description": "提供专业的域名注册和管理服务"
+  },
+  {
+    "id": "2",
+    "name": "网站建设平台",
+    "url": "https://example.com/website-builder",
+    "description": "快速搭建专业网站的一站式平台"
+  },
+  {
+    "id": "3",
+    "name": "域名行情分析",
+    "url": "https://example.com/domain-market",
+    "description": "最新域名市场趋势和价值分析"
+  },
+  {
+    "id": "4",
+    "name": "云服务提供商",
+    "url": "https://example.com/cloud",
+    "description": "高性能云服务器和存储解决方案"
+  },
+  {
+    "id": "5",
+    "name": "域名投资指南",
+    "url": "https://example.com/investment",
+    "description": "专业的域名投资策略和建议"
+  }
+]
+
