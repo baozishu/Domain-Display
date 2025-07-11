@@ -1,0 +1,21 @@
+/* favicon样式 - 作为图标加载失败时的备用 */
+.favicon-fallback {
+    width: 16px;
+    height: 16px;
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    border-radius: 4px;
+    position: relative;
+    display: inline-block;
+}
+
+.favicon-fallback::before {
+    content: "D";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-weight: bold;
+    font-size: 10px;
+    font-family: Arial, sans-serif;
+} 

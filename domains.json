@@ -1,0 +1,231 @@
+{
+  "网站配置": {
+    "标题": "域名展示",
+    "显示标题": 1,
+    "页面标题文本": "域名展示",
+    "图标": "images/favicon.svg",
+    "夜间模式": 0,
+    "夜间模式列表": [
+      {
+        "id": 0,
+        "名称": "白天模式",
+        "描述": "浅色背景，深色文字，适合日间浏览"
+      },
+      {
+        "id": 1,
+        "名称": "夜间模式",
+        "描述": "深色背景，浅色文字，减少夜间视觉疲劳"
+      }
+    ],
+    "展示方式": {
+      "当前模式": 2,
+      "模式列表": [
+        {
+          "id": 1,
+          "名称": "分组展示",
+          "描述": "按后缀分组展示域名"
+        },
+        {
+          "id": 2,
+          "名称": "卡片展示",
+          "描述": "以卡片形式展示所有域名"
+        }
+      ]
+    },
+    "界面设置": {
+      "统计卡片": {
+        "总域名数": {
+          "显示": 1,
+          "标题": "总域名数",
+          "图标": "far fa-clock"
+        },
+        "待售域名": {
+          "显示": 1,
+          "标题": "待售域名",
+          "图标": "fas fa-shopping-cart"
+        },
+        "已售域名": {
+          "显示": 1,
+          "标题": "已售域名",
+          "图标": "fas fa-check-circle"
+        }
+      },
+      "筛选条件": {
+        "域名标签": {
+          "显示": 1,
+          "全部": 1,
+          "待售": 1,
+          "已售": 1,
+          "收藏": 1
+        },
+        "注册商筛选": {
+          "显示": 1
+        },
+        "后缀筛选": {
+          "显示": 1
+        }
+      },
+      "友情链接": {
+        "显示": 1,
+        "标题": "友情链接",
+        "链接列表": [
+          {
+            "名称": "狗头军师",
+            "网址": "https://424.me",
+            "描述": "包子叔の博客"
+          },
+          {
+            "名称": "破碎工坊云",
+            "网址": "https://www.crash.work/aff/XKIVECFZ",
+            "描述": "可靠的云服务"
+          }
+        ]
+      }
+    }
+  },
+  "域名列表": [
+    {
+      "id": 1,
+      "前缀": "ErrorCode",
+      "后缀": ".Team",
+      "注册商": "腾讯云",
+      "到期": "2026-08-09",
+      "价格": 0,
+      "可购买": "是",
+      "非卖": "是",
+      "qrCodeImage": "https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=example.com"
+    },
+    {
+      "id": 2,
+      "前缀": "站",
+      "后缀": ".Top",
+      "注册商": "腾讯云",
+      "到期": "2026-10-22",
+      "价格": 0,
+      "可购买": "是",
+      "非卖": "是",
+      "qrCodeImage": "https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=business.cn"
+    },
+    {
+      "前缀": "Tep",
+      "后缀": ".Pet",
+      "注册商": "西部数码",
+      "到期": "2026-01-25",
+      "价格": 500000,
+      "可购买": "是",
+      "非卖": "否",
+      "qrCodeImage": "https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=Tep.Pet",
+      "id": 3
+    },
+    {
+      "id": 4,
+      "前缀": "聚",
+      "后缀": ".Online",
+      "注册商": "西部数码",
+      "到期": "2026-03-20",
+      "价格": 0,
+      "可购买": "是",
+      "非卖": "是",
+      "qrCodeImage": "https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=premium.ai"
+    },
+    {
+      "id": 5,
+      "前缀": "175753",
+      "后缀": ".Xyz",
+      "注册商": "Spaceship",
+      "到期": "2031-03-11",
+      "价格": 0,
+      "可购买": "是",
+      "非卖": "是",
+      "qrCodeImage": "https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=tech.io"
+    },
+    {
+      "id": 6,
+      "前缀": "177157",
+      "后缀": ".Xyz",
+      "注册商": "Spaceship",
+      "到期": "2026-06-15",
+      "价格": 0,
+      "可购买": "是",
+      "非卖": "是",
+      "qrCodeImage": "https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=tech.io"
+    },
+    {
+      "id": 7,
+      "前缀": "π",
+      "后缀": ".Site",
+      "注册商": "Spaceship",
+      "到期": "2025-08-07",
+      "价格": 0,
+      "可购买": "是",
+      "非卖": "是",
+      "qrCodeImage": "https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=store.shop"
+    },
+    {
+      "id": 8,
+      "前缀": "π",
+      "后缀": ".Team",
+      "注册商": "Spaceship",
+      "到期": "2025-08-07",
+      "价格": 0,
+      "可购买": "是",
+      "非卖": "是",
+      "qrCodeImage": "https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=digital.agency"
+    },
+    {
+      "id": 9,
+      "前缀": "iuin",
+      "后缀": ".De",
+      "注册商": "Netcup",
+      "到期": "2026-04-23",
+      "价格": 0,
+      "可购买": "是",
+      "非卖": "是",
+      "qrCodeImage": "https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=web.site"
+    },
+    {
+      "id": 10,
+      "前缀": "imgou",
+      "后缀": ".Plus",
+      "注册商": "Dynadot",
+      "到期": "2025-09-13",
+      "价格": 66,
+      "可购买": "是",
+      "非卖": "否",
+      "qrCodeImage": "https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=web.site"
+    },
+    {
+      "id": 11,
+      "前缀": "imgou",
+      "后缀": ".Art",
+      "注册商": "Dynadot",
+      "到期": "2026-05-13",
+      "价格": 55,
+      "可购买": "是",
+      "非卖": "否",
+      "qrCodeImage": "https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=web.site"
+    },
+    {
+      "id": 12,
+      "前缀": "Zai",
+      "后缀": ".Li",
+      "注册商": "趣域",
+      "到期": "2026-09-10",
+      "价格": 180,
+      "可购买": "否",
+      "非卖": "否",
+      "qrCodeImage": "https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=web.site"
+    },
+    {
+      "id": 13,
+      "前缀": "Acm",
+      "后缀": ".Ee",
+      "注册商": "Fiber",
+      "到期": "2025-10-12",
+      "价格": 66,
+      "可购买": "否",
+      "非卖": "否",
+      "qrCodeImage": "https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=web.site"
+    }
+  ]
+}

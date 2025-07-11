@@ -1,0 +1,76 @@
+/* 注册商图标的CSS代替实际图片 */
+.registrar-icon {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    position: relative;
+    margin-right: 8px;
+}
+
+.icon-godaddy {
+    background: linear-gradient(135deg, #1DADEA 0%, #0E74AF 100%);
+}
+
+.icon-godaddy::before {
+    content: "G";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.icon-namecheap {
+    background: linear-gradient(135deg, #FF5126 0%, #D83A00 100%);
+}
+
+.icon-namecheap::before {
+    content: "N";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+/* 新的Alibaba图标 */
+.icon-alibaba {
+    background: #FF6A00;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+    overflow: hidden;
+}
+
+.icon-alibaba::before {
+    content: "A";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
+    font-style: italic;
+    text-shadow: 0 1px 1px rgba(0,0,0,0.1);
+    letter-spacing: -0.5px;
+}
+
+/* 默认图标 */
+.icon-default {
+    background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%);
+}
+
+.icon-default::before {
+    content: "?";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+} 

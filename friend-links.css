@@ -1,0 +1,138 @@
+/* 友情链接卡片式样式 */
+.friend-links {
+    margin-top: 40px;
+    margin-bottom: 30px;
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+}
+
+.friend-links-title {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    color: #333;
+    font-weight: 600;
+    position: relative;
+    padding-left: 15px;
+}
+
+.friend-links-title::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 18px;
+    background-color: #3498db;
+    border-radius: 2px;
+}
+
+.friend-links-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+.friend-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 10px;
+    background-color: white;
+    border-radius: 12px;
+    color: #333;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    border: 1px solid #eee;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+    min-height: 80px;
+    text-align: center;
+    border-left: 3px solid var(--bg-color, #3498db);
+    position: relative;
+}
+
+.friend-link:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    border-color: var(--bg-color, #3498db);
+}
+
+.friend-link::before {
+    content: var(--first-letter, '');
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: var(--bg-color, #f5f5f5);
+    border-radius: 50%;
+    margin-bottom: 8px;
+    font-size: 1.2rem;
+    line-height: 1;
+    color: white;
+    font-weight: bold;
+}
+
+/* 移动端适配 */
+@media (max-width: 992px) {
+    .friend-links-list {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .friend-links-list {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+    
+    .friend-link {
+        padding: 10px 8px;
+        font-size: 0.85rem;
+        min-height: 70px;
+    }
+    
+    .friend-link::before {
+        width: 32px;
+        height: 32px;
+        margin-bottom: 6px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .friend-links-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* 暗色模式样式 */
+body.dark-mode .friend-links {
+    border-top-color: #3a3a3a;
+}
+
+body.dark-mode .friend-links-title {
+    color: #e0e0e0;
+}
+
+body.dark-mode .friend-links-title::before {
+    background-color: #3498db;
+}
+
+body.dark-mode .friend-link {
+    background-color: #2d2d2d;
+    color: #ddd;
+    border-color: #444;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+body.dark-mode .friend-link:hover {
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+    border-color: var(--bg-color, #3498db);
+}
+
+body.dark-mode .friend-link::before {
+    background-color: var(--bg-color, #444);
+} 

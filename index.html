@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>域名展示</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="images/registrar-icons.css">
+    <link rel="stylesheet" href="images/qrcode.css">
+    <link rel="stylesheet" href="images/favicon.css">
+    <link rel="stylesheet" href="friend-links.css">
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="title-wrapper">
+            <!-- 左侧展示方式切换按钮 -->
+            <button type="button" class="view-mode-toggle" id="viewModeToggle" aria-label="切换展示方式" onclick="toggleViewMode(); return false;">
+                <i class="fas fa-th-large"></i>
+            </button>
+            
+            <h1 id="pageTitle"></h1>
+            <!-- 夜间模式切换按钮 -->
+            <button type="button" class="dark-mode-toggle" id="darkModeToggle" aria-label="切换夜间模式" onclick="toggleDarkMode(); return false;">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+        
+        <!-- 统计卡片 -->
+        <div class="stats-container">
+            <div class="stat-card">
+                <div class="stat-title">总域名数</div>
+                <div class="stat-value" id="totalDomains">0</div>
+                <div class="stat-icon">
+                    <i class="far fa-clock"></i>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">待售域名</div>
+                <div class="stat-value" id="availableDomains">0</div>
+                <div class="stat-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">已售域名</div>
+                <div class="stat-value" id="soldDomains">0</div>
+                <div class="stat-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 域名列表标题栏 -->
+        <div class="domain-list-header">
+            <div class="domain-list-title">
+                <h2>域名列表</h2>
+                <p class="domain-list-subtitle">选择域名状态进行筛选</p>
+            </div>
+            <div class="domain-tabs">
+                <button class="domain-tab active" data-filter="all">
+                    全部
+                    <span class="tab-count" id="tabCountAll">8</span>
+                </button>
+                <button class="domain-tab" data-filter="available">
+                    待售
+                    <span class="tab-count" id="tabCountAvailable">5</span>
+                </button>
+                <button class="domain-tab" data-filter="sold">
+                    已售
+                    <span class="tab-count" id="tabCountSold">3</span>
+                </button>
+                <button class="domain-tab" data-filter="favorite">
+                    收藏
+                    <span class="tab-count" id="tabCountFavorite">2</span>
+                </button>
+            </div>
+        </div>
+        
+        <!-- 筛选器 -->
+        <div class="filter-bar">
+            <div class="filter-item">
+                <div class="filter-icon">
+                    <i class="fas fa-building"></i>
+                </div>
+                <span class="filter-label">注册商：</span>
+                <div class="select-wrapper">
+                    <select id="registrarFilter" class="filter-select">
+                        <option value="all">全部注册商</option>
+                    </select>
+                    <div class="select-arrow">
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="filter-spacer"></div>
+            <div class="filter-item">
+                <div class="filter-icon">
+                    <i class="fas fa-globe"></i>
+                </div>
+                <span class="filter-label">域后缀：</span>
+                <div class="select-wrapper">
+                    <select id="tldFilter" class="filter-select">
+                        <option value="all">全部后缀</option>
+                    </select>
+                    <div class="select-arrow">
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">全部</button>
+            <button class="filter-btn" data-filter="available">可购买</button>
+            <button class="filter-btn" data-filter="premium">非卖域名</button>
+        </div>
+        
+        <div class="domains-container" id="domainsContainer">
+            <!-- 域名卡片将通过JavaScript动态添加 -->
+        </div>
+        
+        <!-- 友情链接部分 -->
+        <div class="friend-links" id="friendLinksContainer">
+            <h3 class="friend-links-title">友情链接</h3>
+            <div class="friend-links-list" id="friendLinksList">
+                <!-- 友情链接将通过JavaScript动态添加 -->
+            </div>
+        </div>
+    </div>
+
+    <!-- 二维码模态框 -->
+    <div class="qr-modal" id="qrModal">
+        <div class="modal-content">
+            <span class="close-btn" id="closeModal">&times;</span>
+            <h2 class="modal-title">扫码购买域名</h2>
+            <div class="domain-info">
+                <p>域名: <span id="modalDomainName"></span></p>
+                <p>价格: <span id="modalDomainPrice"></span></p>
+            </div>
+            <div class="qr-code" id="qrCode">
+                <!-- 图片二维码将在这里显示 -->
+                <img id="qrCodeImage" src="" alt="支付二维码" class="qr-code-img">
+            </div>
+            <p class="qr-tip">请使用微信描二维码完成付款</p>
+        </div>
+    </div>
+
+    <script src="translations.js"></script>
+    <script src="script.js"></script>
+</body>
+</html> 
